@@ -130,7 +130,28 @@ $('.pagebodydiv table').filter(filter1)
   //   }
   // })
 
+var post_request = function(){
+  $.ajax({
+    type: "POST",
+    url: "https://ratemyprofchrome.herokuapp.com/api/professors",
+    data: {
+      id: "Anil Somayaji",
+      token: 3334
+    },
+    success: function(data){
+      let responseFormatted = data.data;
+      let ratingofprof = data.rating;
+      console.log(`incoming data is ${responseFormatted} and ${ratingofprof}`);
+      console.log(responseFormatted);
+      //console.log(`incoming data is ${data}`);
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown){
+      alert("some error");
+    }
+  })
+}
 
+post_request();
 console.log(profsToSearch);
 
 //alert(counter2);
