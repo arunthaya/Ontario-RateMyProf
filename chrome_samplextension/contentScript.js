@@ -76,7 +76,7 @@ let jqueryFilterTest = function(){
 //let temp = document.body.innerHTML;
 //alert(temp.length);
 let USUCK = "hello";
-
+let profsToSearch = new Set();
 $('.pagebodydiv table').filter(filter1)
   .find('tr').filter(
     function(index){
@@ -89,22 +89,48 @@ $('.pagebodydiv table').filter(filter1)
   .find('table').find('tr')
   .filter(jqueryFilterTest)
   .find('td').filter(instructorFilter)
-  .qtip({
-    content: {
-      text: USUCK
-    },
-    position: {
-      at: 'top left'
-    },
-    hide: {
-      delay: 2000
+  .each(function() {
+    console.log($(this).text())
+    if($.trim($(this).text())){
+      profsToSearch.add($(this).text());
+      $(this).qtip({
+        content: {
+          text: USUCK,
+          title: "RATE MY PROF RATING"
+        },
+        position: {
+          my: 'center right',
+          at: 'center left'
+        },
+        style: {
+          classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+        },
+        hide: {
+          delay: 1000
+        }
+      }).css({
+        'text-decoration':'underline'
+      });
     }
   })
-  .css({
-    'background':'yellow'
-  });
+  // .qtip({
+  //   content: {
+  //     text: USUCK,
+  //     title: "RATE MY PROF RATING"
+  //   },
+  //   position: {
+  //     my: 'center right',
+  //     at: 'center left'
+  //   },
+  //   style: {
+  //     classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+  //   },
+  //   hide: {
+  //     delay: 1000
+  //   }
+  // })
 
 
-console.log(counter);
+console.log(profsToSearch);
 
 //alert(counter2);
