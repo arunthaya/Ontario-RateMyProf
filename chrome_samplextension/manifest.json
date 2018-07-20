@@ -11,7 +11,16 @@
     "content_scripts":[
       {
         "matches":["https://central.carleton.ca/prod/*course_search"],
-        "js":["jquery-3.3.1.min.js","contentScript.js"]
+        "css":[
+          "/jquery.ui/jquery-ui.css",
+          "/jquery.ui/jquery-ui.min.css",
+          "/jquery.ui/jquery-ui.structure.css",
+          "/jquery.ui/jquery-ui.structure.min.css",
+          "/jquery.ui/jquery-ui.theme.css",
+          "/jquery.ui/jquery-ui.theme.min.css",
+          "jquery.qtip.min.css"
+        ],
+        "js":["jquery-3.3.1.min.js","jquery.qtip.min.js","/jquery.ui/jquery-ui.js","contentScript.js"]
       }
     ],
     "icons": {
