@@ -203,7 +203,6 @@ let post_request = function(){
           }
         });
       }
-      //console.log(`incoming data is ${data}`);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown){
       alert("some error");
