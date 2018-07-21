@@ -76,6 +76,7 @@ let jqueryFilterTest = function(){
 //alert(temp.length);
 let USUCK = "hello";
 let profsToSearch = new Set();
+
 $('.pagebodydiv table').filter(filter1)
   .find('tr').filter(
     function(index){
@@ -112,31 +113,31 @@ $('.pagebodydiv table').filter(filter1)
       });
     }
   })
-  // .qtip({
-  //   content: {
-  //     text: USUCK,
-  //     title: "RATE MY PROF RATING"
-  //   },
-  //   position: {
-  //     my: 'center right',
-  //     at: 'center left'
-  //   },
-  //   style: {
-  //     classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
-  //   },
-  //   hide: {
-  //     delay: 1000
-  //   }
-  // })
+//
+// let preciseRobustFilter = function(){
+//   console.log('entered preciseRobustFilter');
+//   console.log($(this));
+//   console.log($(this).find('tr'));
+//   $(this).find('tr').each(function() {
+//     $(this).find('td').each(function() {
+//       if(SCHEDULE_TYPES.includes($(this).text())){
+//         boolToReturn = true;
+//       }
+//     });
+//     return false;
+//   });
+// }
+//
+// $('table').filter(preciseRobustFilter).css({
+//   'background':'red'
+// });
 
-var post_request = function(){
+console.log($('table'));
+let post_request = function(){
   $.ajax({
     type: "POST",
     url: "https://ratemyprofchrome.herokuapp.com/api/professors",
-    data: {
-      id: "Anil Somayaji",
-      token: 3334
-    },
+    data: profsToSearch,
     success: function(data){
       let responseFormatted = data.data;
       let ratingofprof = data.rating;
@@ -150,7 +151,9 @@ var post_request = function(){
   })
 }
 
-post_request();
-console.log(profsToSearch);
+
+//post_request();
+//console.log(profsToSearch);
+console.log(location.href);
 
 //alert(counter2);
