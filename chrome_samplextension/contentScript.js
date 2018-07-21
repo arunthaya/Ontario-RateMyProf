@@ -23,7 +23,6 @@ let professorFilterFiller = function(){
     let numberToPush = 11 + i*12;
     professorFilter.push(numberToPush)
   }
-  //console.log(professorFilter);
 };
 
 professorFilterFiller();
