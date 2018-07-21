@@ -23,4 +23,4 @@ Steps to install:
 ![Alt text](/images/underline.png "Extension underlines all prof's names to signify you can hover over")
 ![Alt text](/images/rating.png "How the extension should look like on Carleton's page")
 
-### Enjoy! Star it if you liked it, follow if you loved it!
+### Enjoy! Star it if you liked it, follow me if you loved it!
