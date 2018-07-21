@@ -1,4 +1,4 @@
-## chrome_plugin
+# chrome_plugin
 Chrome plugin that will help students all around the globe. (Secret)
 Things to do:
 - [x] Create sql connection
@@ -19,4 +19,4 @@ Steps to install:
 6. Navigate to: https://central.carleton.ca/prod/bwysched.p_select_term?wsea_code=EXT
 7. Select appropriate term and continue.
 
-## Enjoy! Star it if you liked it, follow if you loved it! 
+## Enjoy! Star it if you liked it, follow if you loved it!
