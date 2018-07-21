@@ -162,22 +162,7 @@ $('input:checkbox').parent().parent()
   nodeArrayCheck.push($(this));
   if($.trim($(this).text())){
     profsToSearch.add($(this).text());
-    $(this).qtip({
-      content: {
-        text: USUCK,
-        title: $(this).text() + "'s Rating"
-      },
-      position: {
-        my: 'center right',
-        at: 'center left'
-      },
-      style: {
-        classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
-      },
-      hide: {
-        delay: 1000
-      }
-    }).css({
+    $(this).css({
       'text-decoration':'underline'
     });
   }
@@ -200,6 +185,24 @@ let post_request = function(){
       let ratingofprof = data.rating;
       console.log(`incoming data is ${responseFormatted} and ${ratingofprof}`);
       console.log(responseFormatted);
+      for(let i=0; i<nodeArrayCheck.length; i++){
+        nodeArrayCheck[i].qtip({
+          content: {
+            text: ratingofprof,
+            title: nodeArrayCheck[i].text() + "'s Rating"
+          },
+          position: {
+            my: 'center right',
+            at: 'center left'
+          },
+          style: {
+            classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+          },
+          hide: {
+            delay: 1000
+          }
+        });
+      }
       //console.log(`incoming data is ${data}`);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown){

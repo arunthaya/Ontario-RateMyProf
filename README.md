@@ -19,4 +19,8 @@ Steps to install:
 6. Navigate to: https://central.carleton.ca/prod/bwysched.p_select_term?wsea_code=EXT
 7. Select appropriate term and continue.
 
-## Enjoy! Star it if you liked it, follow if you loved it!
+## Pics from app
+![Alt text](/images/underline.png "Extension underlines all prof's names to signify you can hover over")
+![Alt text](/images/rating.png "How the extension should look like on Carleton's page")
+
+### Enjoy! Star it if you liked it, follow if you loved it!
