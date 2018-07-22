@@ -162,7 +162,48 @@ $('input:checkbox').parent().parent()
   nodeArrayCheck.push($(this));
   if($.trim($(this).text())){
     profsToSearch.add($(this).text());
-    $(this).css({
+    let profName = $(this).text();
+    $(this).qtip({
+      content: {
+        text: function(event, api){
+          $.ajax({
+            url:'https://ratemyprofchrome.herokuapp.com/api/ratings',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+              professorName: $(this).text()
+            },
+            success: function(data){
+              console.log(data);
+              api.set('content.text', data.rating);
+              api.set('content.title', profName + "'s Rating");
+            },
+            error: function(xhr, status, error){
+              console.log(data);
+              api.set('content.text', error);
+              api.set('content.title', 'Error');
+            }
+          });
+          // .then(function(content){
+          //   let rating = data.rating;
+          //   api.set('content.text', content);
+          // }, function(xhr, status, error){
+          //   api.set('content.text', status + ': ' + error);
+          // });
+        }
+      },
+      position: {
+        my: 'center right',
+        at: 'center left'
+      },
+      style: {
+        classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+      },
+      hide: {
+        delay: 1000
+      }
+    })
+    .css({
       'text-decoration':'underline'
     });
   }
@@ -211,7 +252,7 @@ let post_request = function(){
 }
 
 
-post_request();
+//post_request();
 //console.log(profsToSearch);
 console.log(location.href);
 
