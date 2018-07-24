@@ -19,8 +19,13 @@ const SCHEDULE_TYPES = [
 
 let professorFilter = [];
 let professorFilterFiller = function(){
+  let multiplier = 11;
+  if($('h2').text() == "Registrar's Office"){
+    multiplier = 10;
+  }
+  console.log(`multiplier is ${multiplier}`);
   for(let i=0; i<100; i++){
-    let numberToPush = 11 + i*12;
+    let numberToPush = multiplier + i*(multiplier + 1);
     professorFilter.push(numberToPush)
   }
 };
@@ -77,7 +82,7 @@ let jqueryFilterTest = function(){
 let USUCK = "hello";
 let profsToSearch = new Set();
 
-$('.pagebodydiv table').filter(filter1)
+/* $('.pagebodydiv table').filter(filter1)
   .find('tr').filter(
     function(index){
       return index == 4;
@@ -112,27 +117,105 @@ $('.pagebodydiv table').filter(filter1)
         'text-decoration':'underline'
       });
     }
-  })
+  }); */
 //
-// let preciseRobustFilter = function(){
-//   console.log('entered preciseRobustFilter');
-//   console.log($(this));
-//   console.log($(this).find('tr'));
-//   $(this).find('tr').each(function() {
-//     $(this).find('td').each(function() {
-//       if(SCHEDULE_TYPES.includes($(this).text())){
-//         boolToReturn = true;
-//       }
-//     });
-//     return false;
-//   });
-// }
-//
-// $('table').filter(preciseRobustFilter).css({
-//   'background':'red'
-// });
+let tempCounter = 0;
+let preciseRobustFilter = function(){
+  // console.log('--------------------------->')
+  // console.log($(this).has('table'));
+  // console.log(`tempCounter is ${tempCounter}`);
+  if(tempCounter == 0) {
+    tempCounter++;
+    return false;
+  }
+  let boolean_RobustFilter = false;
+  $(this).find('tr').each(function() {
+    $(this).find('td').each(function() {
+      if(SCHEDULE_TYPES.includes($(this).text())){
+        boolean_RobustFilter = true;
+      }
+    });
+  });
+  tempCounter++;
+  return boolean_RobustFilter;
+  // console.log('---------------------------<')
+}
 
-console.log($('table'));
+// let tempTester = $('table')
+// .filter(preciseRobustFilter)
+// .find('tr')
+// .filter(jqueryFilterTest)
+// .css({'background':'yellow'})
+// .makeArray();
+
+//
+// console.log(typeof tempTester);
+// console.log(tempTester);
+
+//console.log($('tr input:checkbox'));
+
+let nodeArrayCheck = [];
+$('input:checkbox').parent().parent()
+.find('td')
+.filter(instructorFilter)
+.each(function() {
+  nodeArrayCheck.push($(this));
+  if($.trim($(this).text())){
+    profsToSearch.add($(this).text());
+    let profName = $(this).text();
+    $(this).qtip({
+      content: {
+        text: function(event, api){
+          $.ajax({
+            url:'https://ratemyprofchrome.herokuapp.com/api/ratings',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+              professorName: $(this).text()
+            },
+            success: function(data){
+              console.log(data);
+              api.set('content.text', data.rating);
+              api.set('content.title', profName + "'s Rating");
+            },
+            error: function(xhr, status, error){
+              console.log(data);
+              api.set('content.text', error);
+              api.set('content.title', 'Error');
+            }
+          });
+          // .then(function(content){
+          //   let rating = data.rating;
+          //   api.set('content.text', content);
+          // }, function(xhr, status, error){
+          //   api.set('content.text', status + ': ' + error);
+          // });
+        }
+      },
+      position: {
+        my: 'center right',
+        at: 'center left'
+      },
+      style: {
+        classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+      },
+      hide: {
+        delay: 1000
+      }
+    })
+    .css({
+      'text-decoration':'underline'
+    });
+  }
+});
+
+console.log(nodeArrayCheck);
+
+//
+// console.log($('input:checkbox').closest());
+// console.log($('input:checkbox').parent().parent());
+
+//console.log($('table'));
 let post_request = function(){
   $.ajax({
     type: "POST",
@@ -143,7 +226,24 @@ let post_request = function(){
       let ratingofprof = data.rating;
       console.log(`incoming data is ${responseFormatted} and ${ratingofprof}`);
       console.log(responseFormatted);
-      //console.log(`incoming data is ${data}`);
+      for(let i=0; i<nodeArrayCheck.length; i++){
+        nodeArrayCheck[i].qtip({
+          content: {
+            text: ratingofprof,
+            title: nodeArrayCheck[i].text() + "'s Rating"
+          },
+          position: {
+            my: 'center right',
+            at: 'center left'
+          },
+          style: {
+            classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+          },
+          hide: {
+            delay: 1000
+          }
+        });
+      }
     },
     error: function(XMLHttpRequest, textStatus, errorThrown){
       alert("some error");
