@@ -13,12 +13,11 @@ const SCHEDULE_TYPES = [
 ];
 
 //jQuery plugin to check for deepest element testing
-/*(function ($) {
+(function ($) {
     $.fn.deepest = function (selector) {
         var deepestLevel  = 0,
             $deepestChild,
             $deepestChildSet;
-
         this.each(function () {
             $parent = $(this);
             $parent
@@ -39,7 +38,7 @@ const SCHEDULE_TYPES = [
 
         return this.pushStack($deepestChildSet || [], 'deepest', selector || '');
     };
-}(jQuery));*/
+}(jQuery));
 
 //professorFilter is an array of indexes that match the respective 'td' element of each prof
 let professorFilter = [];
@@ -55,13 +54,12 @@ let professorFilterFiller = function(callback){
   }
   callback();
 };
-
 let instructorFilter = function(index){
   return professorFilter.includes(index);
 }
 
 //Actual function to add information
-function qTipAdder(){
+/*function qTipAdder(){
   $('input:checkbox').parent().parent()
   .find('td')
   .filter(instructorFilter)
@@ -88,7 +86,7 @@ function qTipAdder(){
               },
               error: function(xhr, status, error){
                 api.set('content.text', error);
-                api.set('content.title', 'Error');
+                api.set('content.title', 'No ratings found');
               }
             });
           }
@@ -109,7 +107,64 @@ function qTipAdder(){
       });
     }
   });
-}
+}*/
 
 //Call the initial function with the real function as a callback for adding actual data
-professorFilterFiller(qTipAdder);
+//professorFilterFiller(qTipAdder);
+
+let indexesToWorkWith = [];
+let tempTester = [];
+tempTester = $('td').contents().filter(function(){
+  return this.nodeType === 3;
+});
+//think i've made it dynamic to work on everything holy fucking shit dawg
+for(let i=0; i<tempTester.length; i++){
+  let strTest = "";
+  strTest = tempTester[i].textContent;
+  if(strTest.split(' ').length == 2){
+    let tempVarToEdit = tempTester[i];
+    $(tempVarToEdit).wrap("<strong></strong>");
+  }
+}
+
+// let elemThree = tempTester[43];
+// $(elemThree).wrap("<strong></strong>");
+$("strong").each(function(){
+  $(this).qtip({
+    content: {
+      text: "hello",
+      content: "buh bye"
+    },
+    position: {
+      my: 'center right',
+      at: 'center left'
+    },
+    style: {
+      classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+    },
+    hide: {
+      delay: 1000
+    }
+  });
+});
+
+
+console.log(tempTester);
+let ttt = $("body").contents().filter(function(){
+  return this.nodeType === 3;
+});
+
+function tester2000() {
+  let answerArr = [];
+  let objTest = $('td');
+  let arrTest = $.makeArray(objTest);
+  for(let i=0; i<arrTest.length; i++){
+    let arrStr = [];
+    arrStr = arrTest[i].textContent.split(' ');
+    if(arrStr.length == 2){
+      answerArr.push(arrTest[i].textContent);
+    }
+  }
+  console.log(answerArr);
+  $("td:contains('Augustine')").css("text-decoration", "underline");
+}

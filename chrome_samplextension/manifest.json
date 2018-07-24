@@ -10,7 +10,8 @@
     ],
     "content_scripts":[
       {
-        "matches":["https://central.carleton.ca/prod/*course_search"],
+        "matches":["https://central.carleton.ca/prod/*course_search",
+        "https://applicants.mcmaster.ca/psp/*"],
         "css":[
           "/jquery.ui/jquery-ui.css",
           "/jquery.ui/jquery-ui.min.css",
