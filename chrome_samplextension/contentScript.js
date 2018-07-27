@@ -11,38 +11,17 @@ const SCHEDULE_TYPES = [
   "Independent Study",
   "Research Project"
 ];
+//Call the initial function with the real function as a callback for adding actual data
+//alert('why does this line work');
+//professorFilterFiller(qTipAdder);
+console.log('please work');
 
+/*
 //jQuery plugin to check for deepest element testing
-(function ($) {
-    $.fn.deepest = function (selector) {
-        var deepestLevel  = 0,
-            $deepestChild,
-            $deepestChildSet;
-        this.each(function () {
-            $parent = $(this);
-            $parent
-                .find((selector || '*'))
-                .each(function () {
-                    if (!this.firstChild || this.firstChild.nodeType !== 1) {
-                        var levelsToParent = $(this).parentsUntil($parent).length;
-                        if (levelsToParent > deepestLevel) {
-                            deepestLevel = levelsToParent;
-                            $deepestChild = $(this);
-                        } else if (levelsToParent === deepestLevel) {
-                            $deepestChild = !$deepestChild ? $(this) : $deepestChild.add(this);
-                        }
-                    }
-                });
-            $deepestChildSet = !$deepestChildSet ? $deepestChild : $deepestChildSet.add($deepestChild);
-        });
-
-        return this.pushStack($deepestChildSet || [], 'deepest', selector || '');
-    };
-}(jQuery));
-
 //professorFilter is an array of indexes that match the respective 'td' element of each prof
 let professorFilter = [];
-let professorFilterFiller = function(callback){
+var professorFilterFiller = function(callback){
+  console.log('why is it not working');
   let multiplier = 11;
   if($('h2').text() == "Registrar's Office"){
     multiplier = 10;
@@ -54,12 +33,13 @@ let professorFilterFiller = function(callback){
   }
   callback();
 };
-let instructorFilter = function(index){
+
+var instructorFilter = function(index){
   return professorFilter.includes(index);
 }
 
 //Actual function to add information
-/*function qTipAdder(){
+function qTipAdder(){
   $('input:checkbox').parent().parent()
   .find('td')
   .filter(instructorFilter)
@@ -107,11 +87,10 @@ let instructorFilter = function(index){
       });
     }
   });
-}*/
+}
 
-//Call the initial function with the real function as a callback for adding actual data
-//professorFilterFiller(qTipAdder);
 
+/*
 let indexesToWorkWith = [];
 let tempTester = [];
 tempTester = $('td').contents().filter(function(){
@@ -129,7 +108,7 @@ for(let i=0; i<tempTester.length; i++){
 
 // let elemThree = tempTester[43];
 // $(elemThree).wrap("<strong></strong>");
-$("strong").each(function(){
+/*$("strong").each(function(){
   $(this).qtip({
     content: {
       text: "hello",
@@ -167,4 +146,4 @@ function tester2000() {
   }
   console.log(answerArr);
   $("td:contains('Augustine')").css("text-decoration", "underline");
-}
+}*/
