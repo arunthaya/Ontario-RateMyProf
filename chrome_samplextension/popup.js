@@ -9,6 +9,11 @@ var buttonRetrieved;
 //
 // window.onload = buttonGetter();
 
+/**
+ * Handle a submit from the searchbar form
+ * @param {event} - to prevent the form from doing default actions
+ */
+
 let handleClick = function(details){
   chrome.tabs.executeScript(
     details.tabId,
@@ -21,12 +26,20 @@ let handleClick = function(details){
   }
 }
 
+/**
+ * Handle a submit from the searchbar form
+ * @param {event} - to prevent the form from doing default actions
+ */
+
 let handleSubmit = function(e){
   e.preventDefault();
   console.log($('body'));
   console.log('hello');
 }
 
+/**
+ * Initiate listeners to active elements
+ */
 
 window.onload = function() {
   document.getElementById('ratings').addEventListener('click',handleClick);
