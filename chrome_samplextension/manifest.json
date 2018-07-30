@@ -3,12 +3,11 @@
     "version": "1.0",
     "description": "Build an Extension!",
     "permissions": [
-      "http://*/*",
-      "https://*/*",
       "https://ratemyprofchrome.herokuapp.com/",
       "activeTab",
       "declarativeContent",
-      "storage"
+      "storage",
+      "*://*/*"
     ],
     "browser_action":{
       "default_icon": {

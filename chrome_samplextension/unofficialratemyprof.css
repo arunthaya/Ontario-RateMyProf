@@ -11,6 +11,10 @@ body {
   max-height: 600px;
 }
 
+.links{
+  cursor: pointer;
+}
+
 .links:hover{
   text-decoration: underline;
 }

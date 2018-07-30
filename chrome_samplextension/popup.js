@@ -9,15 +9,16 @@ var buttonRetrieved;
 //
 // window.onload = buttonGetter();
 
-let handleClick = function(){
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-      {file: "contentScript.js"},
-      function(result){
-        console.log('uh duh herro');
-      }
-    );
-  });
+let handleClick = function(details){
+  chrome.tabs.executeScript(
+    details.tabId,
+    {file: "contentScript.js"}
+  ), _=>{
+    let e = chrome.runtime.lastError;
+    if( e !== undefined){
+      console.log(e);
+    }
+  }
 }
 
 window.onload = function() {
