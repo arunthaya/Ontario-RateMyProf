@@ -3,6 +3,10 @@ body {
   margin: 0px;
 }
 
+textarea:focus, input:focus{
+  outline: 0.5;
+}
+
 #wrapper {
   margin-left: 5%;
   width: 275px;
@@ -11,20 +15,20 @@ body {
   max-height: 600px;
 }
 
+.tblCss {
+  width: 70%;
+}
+
 .links{
   cursor: pointer;
 }
 
 .links:hover{
-  text-decoration: underline;
+  background: lightgrey;
 }
 
 #searchbar{
   margin-top: 5%;
   margin-bottom: 5%;
-  width:100%;
-}
-
-input{
-  width: 90%;
+  width:90%;
 }
