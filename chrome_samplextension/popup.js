@@ -21,8 +21,17 @@ let handleClick = function(details){
   }
 }
 
+let handleSubmit = function(e){
+  e.preventDefault();
+  console.log($('body'));
+  console.log('hello');
+}
+
+
 window.onload = function() {
   document.getElementById('ratings').addEventListener('click',handleClick);
+  document.getElementById('searchForProf').addEventListener('submit', handleSubmit);
+  console.log(document.getElementById('searchForProf'));
 }
 
 // $('body').on('click', '#ratings', function () {

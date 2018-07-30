@@ -24,7 +24,7 @@ textarea:focus, input:focus{
 }
 
 .links:hover{
-  background: lightgrey;
+  background: #eee;
 }
 
 #searchbar{
