@@ -89,14 +89,15 @@ function qTipAdder(){
   });
 }
 
+*/
 
-/*
 let indexesToWorkWith = [];
 let tempTester = [];
 tempTester = $('td').contents().filter(function(){
   return this.nodeType === 3;
 });
-//think i've made it dynamic to work on everything holy fucking shit dawg
+
+console.log(tempTester);
 for(let i=0; i<tempTester.length; i++){
   let strTest = "";
   strTest = tempTester[i].textContent;
@@ -106,9 +107,8 @@ for(let i=0; i<tempTester.length; i++){
   }
 }
 
-// let elemThree = tempTester[43];
-// $(elemThree).wrap("<strong></strong>");
-/*$("strong").each(function(){
+
+$("strong").each(function(){
   $(this).qtip({
     content: {
       text: "hello",
@@ -128,6 +128,7 @@ for(let i=0; i<tempTester.length; i++){
 });
 
 
+/*
 console.log(tempTester);
 let ttt = $("body").contents().filter(function(){
   return this.nodeType === 3;
@@ -146,4 +147,5 @@ function tester2000() {
   }
   console.log(answerArr);
   $("td:contains('Augustine')").css("text-decoration", "underline");
-}*/
+}
+*/

@@ -22,6 +22,11 @@
       "default_title": "Unofficial Rate My Prof",
       "default_popup": "popup.html"
     },
+    "content_scripts":[{
+        "matches": ["https://*/*"],
+        "css":["jquery.qtip.min.css"],
+        "js": ["jquery-3.3.1.min.js", "jquery.qtip.min.js", "contentScript.js"]
+      }],
     "author":"arun thayanithy",
     "manifest_version": 2
  }
