@@ -1,20 +1,30 @@
 //List of schedule types as determined by carleton for selection
-const SCHEDULE_TYPES = [
-  "Lecture",
-  "Tutorial",
-  "Seminar",
-  "Discussion Group",
-  "Film Screening",
-  "Laboratory",
-  "Video on Demand",
-  "Directed Studies",
-  "Independent Study",
-  "Research Project"
+let SCHEDULE_TYPES = [
+  "lecture",
+  "tutorial",
+  "seminar",
+  "discussion",
+  "group",
+  "film",
+  "screening",
+  "laboratory",
+  "video",
+  "on",
+  "demand",
+  "directed",
+  "studies",
+  "independent",
+  "study",
+  "research",
+  "project",
+  "field",
+  "placement"
 ];
 //Call the initial function with the real function as a callback for adding actual data
 //alert('why does this line work');
 //professorFilterFiller(qTipAdder);
 console.log('please work');
+
 
 /*
 //jQuery plugin to check for deepest element testing
@@ -95,13 +105,36 @@ let indexesToWorkWith = [];
 let tempTester = [];
 tempTester = $('td').contents().filter(function(){
   return this.nodeType === 3;
-});
+}).filter(
+  function(){
+    let bool_notScheduleType = true;
+    let stringToCheck = $(this).text();
+    if(/\d/.test(stringToCheck)){
+      //console.log('contains number');
+      return false;
+    }
+    if(stringToCheck.length >= 40){
+      return false;
+    }
+    let stringArr = [];
+    stringArr = stringToCheck.split(' ');
+    for(let i=0; i<stringArr.length; i++){
+      //console.log(stringArr[i].toLowerCase());
+      if(SCHEDULE_TYPES.includes(stringArr[i].toLowerCase())){
+        //console.log(`if statement reached`);
+        return false;
+      }
+    }
+    return bool_notScheduleType;
+  }
+);
 
 console.log(tempTester);
 for(let i=0; i<tempTester.length; i++){
+  console.log(tempTester[i].textContent);
   let strTest = "";
   strTest = tempTester[i].textContent;
-  if(strTest.split(' ').length == 2){
+  if(strTest.split(' ').length == 2 || strTest.split(' ').length == 3){
     let tempVarToEdit = tempTester[i];
     $(tempVarToEdit).wrap("<strong></strong>");
   }
@@ -109,6 +142,7 @@ for(let i=0; i<tempTester.length; i++){
 
 
 $("strong").each(function(){
+  console.log($(this).text());
   $(this).qtip({
     content: {
       text: "hello",
