@@ -7,15 +7,27 @@ var buttonRetrieved;
  */
 
 let handleClick = function(details){
+  // chrome.runtime.sendMessage(
+  //   {
+  //     type: "testing",
+  //     url: window.location.href
+  //   },
+  //   function (response) {
+  //     console.log(response);
+  //   }
+  // );
   chrome.tabs.executeScript(
-    details.tabId,
-    {file: "contentScript.js"}
-  ), _=>{
-    let e = chrome.runtime.lastError;
-    if( e !== undefined){
-      console.log(e);
-    }
-  }
+    {code: 'window.location.host'},
+    sendUrl);
+}
+
+function sendUrl(resultsArray){
+  chrome.runtime.sendMessage({
+    type: "testing",
+    url: resultsArray[0]
+  }, function(response){
+    console.log(response);
+  })
 }
 
 /**
@@ -66,14 +78,7 @@ window.onload = function() {
   console.log(document.getElementById('searchForProf'));
 }
 
+/*
 $('body').on('click', '#ratings', function () {
      console.log("yeahhhh!!! but this doesn't work for me :(");
-     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-       chrome.tabs.executeScript(
-         {file: "contentScript.js"},
-         function(result){
-           console.log('uh duh herro');
-         }
-       );
-     });
-});
+});*/

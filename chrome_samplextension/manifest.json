@@ -4,13 +4,20 @@
     "description": "Build an Extension!",
     "permissions": [
       "https://ratemyprofchrome.herokuapp.com/",
+      "background",
       "activeTab",
       "declarativeContent",
       "storage",
       "*://*/*"
     ],
     "background": {
-      "scripts": ["contentScript.js"]
+      "persistent": false,
+      "scripts": [
+        "jquery-3.3.1.min.js",
+        "jquery.qtip.min.js",
+        "background.js"
+      ],
+      "css":["jquery.qtip.min.css"]
     },
     "browser_action":{
       "default_icon": {
@@ -22,11 +29,9 @@
       "default_title": "Unofficial Rate My Prof",
       "default_popup": "popup.html"
     },
-    "content_scripts":[{
-        "matches": ["https://*/*"],
-        "css":["jquery.qtip.min.css"],
-        "js": ["jquery-3.3.1.min.js", "jquery.qtip.min.js", "contentScript.js"]
-      }],
+    "web_accessible_resources":[
+      "style/jquery.qtip.min.css"
+    ],
     "author":"arun thayanithy",
     "manifest_version": 2
  }
