@@ -27,7 +27,7 @@ function sendUrl(resultsArray){
     url: resultsArray[0]
   }, function(response){
     console.log(response);
-  })
+  });
 }
 
 /**
@@ -42,6 +42,9 @@ let handleSubmit = function(e){
 }
 
 let handleInput = function(){
+  chrome.storage.sync.get('defaultSchool', function(data){
+    console.log(data.defaultSchool);
+  });
   searchBarActivated = false;
   if($.trim($('#searchBox').val()) == ""){
     console.log('blank');

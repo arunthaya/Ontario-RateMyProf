@@ -101,67 +101,74 @@ function qTipAdder(){
 
 */
 
-let indexesToWorkWith = [];
-let tempTester = [];
-tempTester = $('td').contents().filter(function(){
-  return this.nodeType === 3;
-}).filter(
-  function(){
-    let bool_notScheduleType = true;
-    let stringToCheck = $(this).text();
-    if(/\d/.test(stringToCheck)){
-      //console.log('contains number');
-      return false;
+
+let boldProfNames = function(tempTester, callback){
+  for(let i=0; i<tempTester.length; i++){
+    console.log(tempTester[i].textContent);
+    let strTest = "";
+    strTest = tempTester[i].textContent;
+    if(strTest.split(' ').length == 2 || strTest.split(' ').length == 3){
+      let tempVarToEdit = tempTester[i];
+      $(tempVarToEdit).wrap("<strong></strong>");
     }
-    if(stringToCheck.length >= 40){
-      return false;
-    }
-    let stringArr = [];
-    stringArr = stringToCheck.split(' ');
-    for(let i=0; i<stringArr.length; i++){
-      //console.log(stringArr[i].toLowerCase());
-      if(SCHEDULE_TYPES.includes(stringArr[i].toLowerCase())){
-        //console.log(`if statement reached`);
+  }
+  callback();
+}
+
+let grabProfNames = function(callback){
+  let tempTester = [];
+  tempTester = $('td').contents().filter(function(){
+    return this.nodeType === 3;
+  }).filter(
+    function(){
+      let bool_notScheduleType = true;
+      let stringToCheck = $(this).text();
+      if(/\d/.test(stringToCheck)){
+        //console.log('contains number');
         return false;
       }
+      if(stringToCheck.length >= 40){
+        return false;
+      }
+      let stringArr = [];
+      stringArr = stringToCheck.split(' ');
+      for(let i=0; i<stringArr.length; i++){
+        //console.log(stringArr[i].toLowerCase());
+        if(SCHEDULE_TYPES.includes(stringArr[i].toLowerCase())){
+          //console.log(`if statement reached`);
+          return false;
+        }
+      }
+      return bool_notScheduleType;
     }
-    return bool_notScheduleType;
-  }
-);
+  );
+  callback(tempTester, profAjaxReq);
+}
 
-console.log(tempTester);
-for(let i=0; i<tempTester.length; i++){
-  console.log(tempTester[i].textContent);
-  let strTest = "";
-  strTest = tempTester[i].textContent;
-  if(strTest.split(' ').length == 2 || strTest.split(' ').length == 3){
-    let tempVarToEdit = tempTester[i];
-    $(tempVarToEdit).wrap("<strong></strong>");
-  }
+let profAjaxReq = function(){
+  $("strong").each(function(){
+    console.log($(this).text());
+    $(this).qtip({
+      content: {
+        text: "hello",
+        content: "buh bye"
+      },
+      position: {
+        my: 'center right',
+        at: 'center left'
+      },
+      style: {
+        classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+      },
+      hide: {
+        delay: 1000
+      }
+    });
+  });
 }
 
 
-$("strong").each(function(){
-  console.log($(this).text());
-  $(this).qtip({
-    content: {
-      text: "hello",
-      content: "buh bye"
-    },
-    position: {
-      my: 'center right',
-      at: 'center left'
-    },
-    style: {
-      classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
-    },
-    hide: {
-      delay: 1000
-    }
-  });
-});
-
-
+grabProfNames(boldProfNames);
 /*
 console.log(tempTester);
 let ttt = $("body").contents().filter(function(){
