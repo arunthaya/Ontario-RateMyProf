@@ -77,6 +77,7 @@ window.onload = function() {
   document.getElementById('ratings').addEventListener('click',handleClick);
   document.getElementById('searchForProf').addEventListener('submit', handleSubmit);
   document.getElementById('searchForProf').addEventListener('input', handleInput);
+  document.getElementById('options').addEventListener('click', openOptions);
   $('#searchbar').on('click', 'button', herro);
   console.log(document.getElementById('searchForProf'));
 }

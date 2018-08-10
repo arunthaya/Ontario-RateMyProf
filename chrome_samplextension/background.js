@@ -1,10 +1,32 @@
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set(
-    {defaultSchool: 'Carleton University'},
-    function() {
-      console.log('The default school is Carleton');
-  });
+chrome.runtime.onInstalled.addListener(function (details) {
+  if(details.reason == "install"){
+    console.log('just installed');
+    chrome.storage.sync.set(
+      {"defaultSchool": 'Carleton University'},
+      function() {
+        //TODO send message to the front end
+        if(chrome.runtime.error){
+          console.log('Runtime error.');
+        }
+        console.log('The default school is Carleton');
+    });
+    runSettingApp();
+  } else {
+    console.log('not just installed');
+    chrome.storage.sync.get('defaultSchool', function(result){
+      if(chrome.runtime.error){
+        console.log('Runtime error retrieving data saved');
+      }
+      console.log(result.defaultSchool);
+    });
+  }
 });
+
+function runSettingApp(){
+  chrome.tabs.create({
+    url: 'options.html'
+  });
+}
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
