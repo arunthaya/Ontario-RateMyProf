@@ -53,21 +53,54 @@ let handleInput = function(){
     console.log('something entered');
   }
   if(searchBarActivated){
-    if($('#searchBarSubmit').length == 0){
+    if($('#searchBarSubmit').length == 0 && $('#universitySelect').length == 0){
       $('#searchbar').append("<button id='searchBarSubmit' type='button' class='btn btn-primary btn-block'>Search</button>");
+
+      $('#searchbar').append("<input type='checkbox' class='form-check-input' id='defaultSchool' checked>" +
+      "<label id='labelDrop' class='form-check-label' for='defaultSchool'>Automatically Pick School</label>");
+    } else {
+      console.log('critical error - popup.js (65)');
     }
   } else {
     if($('#searchBarSubmit').length != 0){
       $('#searchBarSubmit').remove();
+      $('#defaultSchool').remove();
+      $('#labelDrop').remove();
+      if($('#universitySelect').length != 0){
+        $('#universitySelect').remove();
+      }
+    } else {
+      console.log('critical error - popup.js (72)');
     }
   }
+  $('#defaultSchool').change(function() {
+    if($(this).is(':checked')){
+      console.log('do nothing');
+      if($('#universitySelect').length != 0){
+        $('#universitySelect').remove();
+      }
+    } else {
+      if($('#universitySelect').length == 0){
+        $('#searchbar').append("<div class='top-buffer' id='universitySelect'><select class='form-control'>" +
+          "<option>1</option>" +
+          "</select></div>"
+        );
+      }
+    }
+  })
   console.log('input detected');
 }
+
 
 let herro = function(){
   console.log('testing');
 }
 
+let openOptions = function(){
+  chrome.tabs.create({
+    url: 'options.html'
+  });
+}
 
 /**
  * Initiate listeners to active elements
