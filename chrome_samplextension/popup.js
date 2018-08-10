@@ -82,15 +82,22 @@ let handleInput = function(){
     } else {
       if($('#universitySelect').length == 0){
         $('#searchbar').append("<div class='top-buffer' id='universitySelect'><select class='form-control'>" +
-          "<option>1</option>" +
           "</select></div>"
         );
+
       }
     }
   })
   console.log('input detected');
 }
 
+let populateDropdown = function(){
+  if($('#universitySelect').length == 0){
+    return;
+  } else {
+    
+  }
+}
 
 let herro = function(){
   console.log('testing');

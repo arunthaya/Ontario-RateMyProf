@@ -147,11 +147,30 @@ let grabProfNames = function(callback){
 
 let profAjaxReq = function(){
   $("strong").each(function(){
-    console.log($(this).text());
+    let profName = $(this).text();
     $(this).qtip({
       content: {
-        text: "hello",
-        content: "buh bye"
+        text: function(event, api){
+          $.ajax({
+            url:'https://ratemyprofchrome.herokuapp.com/api/ratings',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+              professorName: $(this).text()
+            },
+            success: function(data){
+              api.set('content.title', profName + "'s Rating");
+              if(data.rating){
+                api.set('content.text', data.rating);
+              } else {
+                api.set('content.text', "No ratings found.");
+              }
+            },
+            error: function(xhr, status, error){
+              api.set('content.text', error);
+              api.set('content.title', 'No ratings found');
+            }
+        }
       },
       position: {
         my: 'center right',
