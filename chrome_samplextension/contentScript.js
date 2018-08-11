@@ -156,9 +156,13 @@ let profAjaxReq = function(){
             type: 'POST',
             dataType: 'json',
             data: {
-              professorName: $(this).text()
+              professorName: profName
             },
             success: function(data){
+              //console.log(JSON.parse(data));
+              console.log(data);
+              console.log(data.length);
+              console.log(data.rating);
               api.set('content.title', profName + "'s Rating");
               if(data.rating){
                 api.set('content.text', data.rating);
@@ -167,21 +171,25 @@ let profAjaxReq = function(){
               }
             },
             error: function(xhr, status, error){
+              console.log(xhr);
+              console.log('------');
+              //console.log(error);
               api.set('content.text', error);
-              api.set('content.title', 'No ratings found');
+              api.set('content.title', `Error code: ${xhr.status}`);
             }
-        }
-      },
-      position: {
-        my: 'center right',
-        at: 'center left'
-      },
-      style: {
-        classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
-      },
-      hide: {
-        delay: 1000
+        });
       }
+    },
+    position: {
+      my: 'center right',
+      at: 'center left'
+    },
+    style: {
+      classes: 'qtip-bootstrap qtip-shadow qtip-rounded'
+    },
+    hide: {
+      delay: 1000
+    }
     });
   });
 }
