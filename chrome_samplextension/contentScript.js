@@ -171,6 +171,7 @@ let profAjaxReq = function(){
               }
             },
             error: function(xhr, status, error){
+              console.log(`error connecting`);
               console.log(xhr);
               console.log('------');
               //console.log(error);
