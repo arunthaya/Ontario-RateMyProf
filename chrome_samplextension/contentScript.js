@@ -144,6 +144,8 @@ let grabProfNames = function(callback){
   );
   callback(tempTester, profAjaxReq);
 }
+let urlTesting = 'http://localhost:3000/api/ratings';
+let urlReal = 'https://ratemyprofchrome.herokuapp.com/api/ratings';
 
 let profAjaxReq = function(){
   $("strong").each(function(){
@@ -152,7 +154,7 @@ let profAjaxReq = function(){
       content: {
         text: function(event, api){
           $.ajax({
-            url:'https://ratemyprofchrome.herokuapp.com/api/ratings',
+            url:urlTesting,
             type: 'POST',
             dataType: 'json',
             data: {
