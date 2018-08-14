@@ -1,0 +1,38 @@
+body {
+  background-color: #f8f8f8;
+  margin: 0px;
+}
+
+textarea:focus, input:focus{
+  outline: 0.5;
+}
+
+#wrapper {
+  margin-left: 5%;
+  width: 275px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  max-height: 600px;
+}
+
+.tblCss {
+  width: 70%;
+}
+
+.links{
+  cursor: pointer;
+}
+
+.links:hover{
+  background: #eee;
+}
+
+#searchbar{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width:90%;
+}
+
+.top-buffer{
+  margin-top: 10px;
+}

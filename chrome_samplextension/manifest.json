@@ -4,31 +4,35 @@
     "description": "Build an Extension!",
     "permissions": [
       "https://ratemyprofchrome.herokuapp.com/",
+      "background",
       "activeTab",
       "declarativeContent",
-      "storage"
+      "storage",
+      "*://*/*"
     ],
-    "content_scripts":[
-      {
-        "matches":["https://central.carleton.ca/prod/*course_search"],
-        "css":[
-          "/jquery.ui/jquery-ui.css",
-          "/jquery.ui/jquery-ui.min.css",
-          "/jquery.ui/jquery-ui.structure.css",
-          "/jquery.ui/jquery-ui.structure.min.css",
-          "/jquery.ui/jquery-ui.theme.css",
-          "/jquery.ui/jquery-ui.theme.min.css",
-          "jquery.qtip.min.css"
-        ],
-        "js":["jquery-3.3.1.min.js","jquery.qtip.min.js","/jquery.ui/jquery-ui.js","contentScript.js"]
-      }
-    ],
-    "icons": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png",
-      "48": "images/get_started48.png",
-      "128": "images/get_started128.png"
+    "background": {
+      "persistent": false,
+      "scripts": [
+        "jquery-3.3.1.min.js",
+        "jquery.qtip.min.js",
+        "background.js"
+      ],
+      "css":["jquery.qtip.min.css"]
     },
+    "browser_action":{
+      "default_icon": {
+        "16": "images/teacher_rmp16.png",
+        "32": "images/teacher_rmp32.png",
+        "48": "images/teacher_rmp48.png",
+        "128": "images/teacher_rmp128.png"
+      },
+      "default_title": "Unofficial Rate My Prof",
+      "default_popup": "popup.html"
+    },
+    "options_page":"options.html",
+    "web_accessible_resources":[
+      "style/jquery.qtip.min.css"
+    ],
     "author":"arun thayanithy",
     "manifest_version": 2
  }
