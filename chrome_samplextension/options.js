@@ -1,5 +1,5 @@
 function save_options(){
-  var school = document.getElementById('school').value;
+  var school = parseInt(document.getElementById('school').value);
   chrome.storage.sync.set({
     defaultSchool: school
   }, function(){
