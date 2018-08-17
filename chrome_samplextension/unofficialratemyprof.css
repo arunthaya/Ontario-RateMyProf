@@ -36,3 +36,14 @@ textarea:focus, input:focus{
 .top-buffer{
   margin-top: 10px;
 }
+
+.spacing {
+  margin-left: 5%;
+  width: 70%;
+}
+
+#content{
+  min-height: 600px;
+  max-height: 600px;
+  overflow-y: scroll;
+}

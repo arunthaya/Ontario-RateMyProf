@@ -118,7 +118,6 @@ let handleSubmit = function(e){
 
 let sendSearchRequest = function(requestObj){
   jqueryCloneElement = $('#menubar').clone();
-  $('#menubar').remove();
   console.log(requestObj);
   $.ajax({
     url: 'http://localhost:3000/api/search',
@@ -126,12 +125,61 @@ let sendSearchRequest = function(requestObj){
     dataType: 'json',
     data: requestObj,
     success: function(data){
+      $('#menubar').remove();
+      populateSearchResults(data);
       console.log(data);
     },
     error: function(xhr, status, error){
       console.log(error);
     }
   })
+}
+
+let populateSearchResults = function(data){
+  console.log(`data length is ${data.length}`);
+  //TODO FIX RESULTS INCOMING AND FINISH PLUGIN TONIGHT
+  if(data.length != 0){
+    $('#content').append(
+      "<div class='panel-group'>"+
+      "<div class='panel panel-default'>"+
+      "<div class='panel-heading'>"+
+      "<h4 class='panel-title'>"+
+      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
+      "</h4>"+
+      "</div>"+
+      "<div id='collapse1' class='panel-collapse collapse'>"+
+      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
+      "</div>"+
+      "<div class='panel panel-default'>"+
+      "<div class='panel-heading'>"+
+      "<h4 class='panel-title'>"+
+      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
+      "</h4>"+
+      "</div>"+
+      "<div id='collapse1' class='panel-collapse collapse'>"+
+      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
+      "</div>"+
+      "<div class='panel panel-default'>"+
+      "<div class='panel-heading'>"+
+      "<h4 class='panel-title'>"+
+      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
+      "</h4>"+
+      "</div>"+
+      "<div id='collapse1' class='panel-collapse collapse'>"+
+      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
+      "</div>"+
+      "<div class='panel panel-default'>"+
+      "<div class='panel-heading'>"+
+      "<h4 class='panel-title'>"+
+      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
+      "</h4>"+
+      "</div>"+
+      "<div id='collapse1' class='panel-collapse collapse'>"+
+      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
+      "</div>"+
+      "</div>"
+    );
+  }
 }
 
 let handleInput = function(){
