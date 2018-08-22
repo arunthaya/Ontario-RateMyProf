@@ -126,7 +126,7 @@ let sendSearchRequest = function(requestObj){
     data: requestObj,
     success: function(data){
       $('#menubar').remove();
-      populateSearchResults(data);
+      populateSearchResults(data, jqueryCloneElement);
       console.log(data);
     },
     error: function(xhr, status, error){
@@ -135,51 +135,29 @@ let sendSearchRequest = function(requestObj){
   })
 }
 
-let populateSearchResults = function(data){
+let populateSearchResults = function(data, jqueryCloneElement){
   console.log(`data length is ${data.length}`);
   //TODO FIX RESULTS INCOMING AND FINISH PLUGIN TONIGHT
+  let profRMPLink = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid=';
+  console.log(data);
   if(data.length != 0){
-    $('#content').append(
-      "<div class='panel-group'>"+
-      "<div class='panel panel-default'>"+
-      "<div class='panel-heading'>"+
-      "<h4 class='panel-title'>"+
-      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
-      "</h4>"+
-      "</div>"+
-      "<div id='collapse1' class='panel-collapse collapse'>"+
-      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
-      "</div>"+
-      "<div class='panel panel-default'>"+
-      "<div class='panel-heading'>"+
-      "<h4 class='panel-title'>"+
-      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
-      "</h4>"+
-      "</div>"+
-      "<div id='collapse1' class='panel-collapse collapse'>"+
-      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
-      "</div>"+
-      "<div class='panel panel-default'>"+
-      "<div class='panel-heading'>"+
-      "<h4 class='panel-title'>"+
-      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
-      "</h4>"+
-      "</div>"+
-      "<div id='collapse1' class='panel-collapse collapse'>"+
-      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
-      "</div>"+
-      "<div class='panel panel-default'>"+
-      "<div class='panel-heading'>"+
-      "<h4 class='panel-title'>"+
-      "<a data-toggle='collapse' href='#collapse1'>"+data[0].teacherfirstname_t+" "+data[0].teacherlastname_t+"</a>"+
-      "</h4>"+
-      "</div>"+
-      "<div id='collapse1' class='panel-collapse collapse'>"+
-      "<div class='panel-body'>Rating: "+data[0].averageratingscore_rf+"</div>"+
-      "</div>"+
-      "</div>"
-    );
+    $('#content').append("<table class='table tblCss'><tr id='backButton'class='links'><td><-Back</td></tr></table>");
+    $('#content').append("<table id='resultsFromSearch' class='table tblCss'></table>");
+    $('#resultsFromSearch').append('<tr><th>Rating</th><th>Prof Name</th></tr>');
+    console.log('real data came in');
+    for(let i=0; i<data.length; i++){
+      $('#resultsFromSearch').append(
+        "<tr class='links clickableRow' data-href='"+profRMPLink+data[i].pk_id+"'><td>"+data[i].averageratingscore_rf+"</td>"+
+        "<td>"+data[i].teacherlastname_t+", "+data[i].teacherfirstname_t+"</td></tr>");
+    }
   }
+  $('.clickableRow').click(function(){
+    let newURL = $(this).data("href");
+    chrome.tabs.create({url: newURL});
+  });
+  // $('#backButton').click(function(){
+  //   $('#')
+  // });
 }
 
 let handleInput = function(){
