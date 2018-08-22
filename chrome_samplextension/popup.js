@@ -117,6 +117,7 @@ let handleSubmit = function(e){
 }
 
 let sendSearchRequest = function(requestObj){
+  //TODO ADD ERROR RESULTS, ADD TITLE RESULTS, FIX UP OPTIONS PAGE
   jqueryCloneElement = $('#menubar').clone();
   console.log(requestObj);
   $.ajax({
@@ -130,6 +131,7 @@ let sendSearchRequest = function(requestObj){
       console.log(data);
     },
     error: function(xhr, status, error){
+      console.log(`xhr is: ${xhr}, status is: ${status}, error is: `);
       console.log(error);
     }
   })
@@ -267,9 +269,14 @@ let herro = function(){
 }
 
 let openOptions = function(){
-  chrome.tabs.create({
-    url: 'options.html'
-  });
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage();
+  } else {
+    window.open(chrome.runtime.getURL('options.html'));
+  }
+  // chrome.tabs.create({
+  //   url: 'options.html'
+  // });
 }
 
 /**
