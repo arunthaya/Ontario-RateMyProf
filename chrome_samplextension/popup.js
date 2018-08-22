@@ -135,13 +135,13 @@ let sendSearchRequest = function(requestObj){
   })
 }
 
-let populateSearchResults = function(data, jqueryCloneElement){
+let populateSearchResults = function(data, jqueryClonedElement){
   console.log(`data length is ${data.length}`);
   //TODO FIX RESULTS INCOMING AND FINISH PLUGIN TONIGHT
   let profRMPLink = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid=';
   console.log(data);
   if(data.length != 0){
-    $('#content').append("<table class='table tblCss'><tr id='backButton'class='links'><td><-Back</td></tr></table>");
+    $('#content').append("<table id='backButtonTable' class='table tblCss'><tr id='backButton'class='links'><td><-Back</td></tr></table>");
     $('#content').append("<table id='resultsFromSearch' class='table tblCss'></table>");
     $('#resultsFromSearch').append('<tr><th>Rating</th><th>Prof Name</th></tr>');
     console.log('real data came in');
@@ -155,9 +155,23 @@ let populateSearchResults = function(data, jqueryCloneElement){
     let newURL = $(this).data("href");
     chrome.tabs.create({url: newURL});
   });
-  // $('#backButton').click(function(){
-  //   $('#')
-  // });
+  $('#backButton').click(function(){
+    console.log('removing');
+    if($('#resultsFromSearch').length != 0){
+      $('#resultsFromSearch').remove();
+      $('#backButtonTable').remove();
+      $('#content').append(jqueryClonedElement);
+      $('#searchBox').val('');
+      if($('#searchBarSubmit').length != 0){
+        $('#searchBarSubmit').remove();
+        $('#defaultSchool').remove();
+        $('#labelDrop').remove();
+        if($('#universitySelect').length != 0){
+          $('#universitySelect').remove();
+        }
+      }
+    }
+  });
 }
 
 let handleInput = function(){
@@ -266,6 +280,7 @@ window.onload = function() {
   document.getElementById('ratings').addEventListener('click',handleClick);
   document.getElementById('searchForProf').addEventListener('submit', handleSubmit);
   document.getElementById('searchForProf').addEventListener('input', handleInput);
+  //$('#searchForProf').change(handleInput);
   document.getElementById('options').addEventListener('click', openOptions);
   $('#searchbar').on('click', 'button', handleSubmit);
   console.log(document.getElementById('searchForProf'));

@@ -42,10 +42,6 @@ textarea:focus, input:focus{
   width: 70%;
 }
 
-#content{
-  max-height: 600px;
-  min-height: 275px;
-}
 
 #resultsFromSearch{
   margin-left: 10px;
