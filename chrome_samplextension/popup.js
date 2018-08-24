@@ -1,6 +1,7 @@
 var searchBarActivated;
 var buttonRetrieved;
 var jqueryCloneElement;
+var jqueryMenuCloned;
 
 let schoolIdDict = {
   1420: 'Carleton University',
@@ -59,8 +60,6 @@ function sendUrl(resultsArray){
 
 let handleSubmit = function(e){
   e.preventDefault();
-  //console.log($('body'));
-  console.log('handlesubmit called n1gg@');
   let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   let stringEntered = $.trim($('#searchBox').val());
   if (format.test(stringEntered)){
@@ -143,14 +142,20 @@ let populateSearchResults = function(data, jqueryClonedElement){
   let profRMPLink = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid=';
   console.log(data);
   if(data.length != 0){
-    $('#content').append("<table id='backButtonTable' class='table tblCss'><tr id='backButton'class='links'><td><-Back</td></tr></table>");
-    $('#content').append("<table id='resultsFromSearch' class='table tblCss'></table>");
-    $('#resultsFromSearch').append('<tr><th>Rating</th><th>Prof Name</th></tr>');
+    $('#content').append("<div id='resultWindow'></div>");
+    $('#resultWindow').append("<table id='backButtonTable' class='table tblCss'><tr id='backButton'class='links'><td><-Back</td></tr></table>");
+    $('#resultWindow').append("<p id='resultHeading' style='margin-left: 5px;'>Results:</p>");
+    $('#resultWindow').append("<table id='resultsFromSearch' class='table tblCss'></table>");
+    $('#resultsFromSearch').append("<tr><th class='centerTd'>Rating</th><th>Prof Name</th></tr>");
     console.log('real data came in');
     for(let i=0; i<data.length; i++){
+      let departmentStr = "Dept: ";
+      if(data[i].department !== undefined){
+        departmentStr += data[i].department;
+      }
       $('#resultsFromSearch').append(
-        "<tr class='links clickableRow' data-href='"+profRMPLink+data[i].pk_id+"'><td>"+data[i].averageratingscore_rf+"</td>"+
-        "<td>"+data[i].teacherlastname_t+", "+data[i].teacherfirstname_t+"</td></tr>");
+        "<tr class='links clickableRow' data-href='"+profRMPLink+data[i].pk_id+"'><td class='centerTd'>"+data[i].averageratingscore_rf+"</td>"+
+        "<td>"+data[i].teacherlastname_t+", "+data[i].teacherfirstname_t+"<p>"+departmentStr+"</p></td></tr>");
     }
   }
   $('.clickableRow').click(function(){
@@ -159,9 +164,8 @@ let populateSearchResults = function(data, jqueryClonedElement){
   });
   $('#backButton').click(function(){
     console.log('removing');
-    if($('#resultsFromSearch').length != 0){
-      $('#resultsFromSearch').remove();
-      $('#backButtonTable').remove();
+    if($('#resultWindow').length != 0){
+      $('#resultWindow').remove();
       $('#content').append(jqueryClonedElement);
       $('#searchBox').val('');
       if($('#searchBarSubmit').length != 0){
@@ -177,6 +181,9 @@ let populateSearchResults = function(data, jqueryClonedElement){
 }
 
 let handleInput = function(){
+  if(jqueryMenuCloned === undefined && $('#resultWindow').length == 0){
+    jqueryMenuCloned = $('#menubar').clone();
+  }
   $('#searchBoxStatus').text('');
   $('#searchBox').css({'background-color': ''});
   searchBarActivated = false;
@@ -202,6 +209,12 @@ let handleInput = function(){
       $('#labelDrop').remove();
       if($('#universitySelect').length != 0){
         $('#universitySelect').remove();
+      }
+      if($('#resultWindow').length != 0){
+        $('#content').empty();
+        $('#content').append(jqueryMenuCloned);
+        document.getElementById('options').addEventListener('click', openOptions);
+        document.getElementById('ratings').addEventListener('click',handleClick);
       }
     } else {
       console.log('critical error - popup.js (72)');
@@ -290,7 +303,7 @@ window.onload = function() {
   //$('#searchForProf').change(handleInput);
   document.getElementById('options').addEventListener('click', openOptions);
   $('#searchbar').on('click', 'button', handleSubmit);
-  console.log(document.getElementById('searchForProf'));
+  //console.log(document.getElementById('searchForProf'));
 }
 
 /*

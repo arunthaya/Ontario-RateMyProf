@@ -44,5 +44,9 @@ textarea:focus, input:focus{
 
 
 #resultsFromSearch{
-  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.centerTd{
+  text-align: center;
 }
