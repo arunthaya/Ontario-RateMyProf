@@ -2,6 +2,7 @@ var searchBarActivated;
 var buttonRetrieved;
 var jqueryCloneElement;
 var jqueryMenuCloned;
+var queryEntered;
 
 let schoolIdDict = {
   1420: 'Carleton University',
@@ -137,13 +138,20 @@ let sendSearchRequest = function(requestObj){
 }
 
 let populateSearchResults = function(data, jqueryClonedElement){
+  if($('#resultWindow').length != 0){
+    $('#resultWindow').empty();
+  }
   console.log(`data length is ${data.length}`);
   //TODO FIX RESULTS INCOMING AND FINISH PLUGIN TONIGHT
   let profRMPLink = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid=';
   console.log(data);
   if(data.length != 0){
     $('#content').append("<div id='resultWindow'></div>");
-    $('#resultWindow').append("<table id='backButtonTable' class='table tblCss'><tr id='backButton'class='links'><td><-Back</td></tr></table>");
+    $('#resultWindow').append("<table id='backButtonTable' class='table tblCss'><tr id='backButton'class='links'><td>"+
+      "<img src='./images/pluginsvg/previous.svg'"+
+       "height='16px'"+
+       "width='16px' />"+
+       " Back</td></tr></table>");
     $('#resultWindow').append("<p id='resultHeading' style='margin-left: 5px;'>Results:</p>");
     $('#resultWindow').append("<table id='resultsFromSearch' class='table tblCss'></table>");
     $('#resultsFromSearch').append("<tr><th class='centerTd'>Rating</th><th>Prof Name</th></tr>");
@@ -167,6 +175,8 @@ let populateSearchResults = function(data, jqueryClonedElement){
     if($('#resultWindow').length != 0){
       $('#resultWindow').remove();
       $('#content').append(jqueryClonedElement);
+      document.getElementById('options').addEventListener('click', openOptions);
+      document.getElementById('ratings').addEventListener('click', handleClick);
       $('#searchBox').val('');
       if($('#searchBarSubmit').length != 0){
         $('#searchBarSubmit').remove();
@@ -214,7 +224,7 @@ let handleInput = function(){
         $('#content').empty();
         $('#content').append(jqueryMenuCloned);
         document.getElementById('options').addEventListener('click', openOptions);
-        document.getElementById('ratings').addEventListener('click',handleClick);
+        document.getElementById('ratings').addEventListener('click', handleClick);
       }
     } else {
       console.log('critical error - popup.js (72)');
@@ -292,11 +302,23 @@ let openOptions = function(){
   // });
 }
 
+let checkUrl = function(resultsArray){
+  console.log(resultsArray[0]);
+  if(resultsArray[0] != 'central.carleton.ca'){
+    document.getElementById('ratings').removeEventListener('click', handleClick);
+    $('#ratings').css('text-decoration', 'line-through');
+    $('#ratings').parent().removeClass("links");
+  }
+}
+
 /**
  * Initiate listeners to active elements
  */
 
 window.onload = function() {
+  chrome.tabs.executeScript(
+    {code: 'window.location.host'},
+  checkUrl);
   document.getElementById('ratings').addEventListener('click',handleClick);
   document.getElementById('searchForProf').addEventListener('submit', handleSubmit);
   document.getElementById('searchForProf').addEventListener('input', handleInput);
