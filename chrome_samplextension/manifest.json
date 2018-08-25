@@ -13,11 +13,11 @@
     "background": {
       "persistent": false,
       "scripts": [
-        "jquery-3.3.1.min.js",
-        "jquery.qtip.min.js",
-        "background.js"
+        "js/jquery-3.3.1.min.js",
+        "js/jquery.qtip.min.js",
+        "js/background.js"
       ],
-      "css":["jquery.qtip.min.css"]
+      "css":["css/jquery.qtip.min.css"]
     },
     "browser_action":{
       "default_icon": {
@@ -33,9 +33,6 @@
       "page":"options.html",
       "open_in_tab":false
     },
-    "web_accessible_resources":[
-      "style/jquery.qtip.min.css"
-    ],
     "author":"arun thayanithy",
     "manifest_version": 2
  }

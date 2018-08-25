@@ -118,28 +118,72 @@ let handleSubmit = function(e){
 
 let sendSearchRequest = function(requestObj){
   //TODO ADD ERROR RESULTS, ADD TITLE RESULTS, FIX UP OPTIONS PAGE
+
+
   jqueryCloneElement = $('#menubar').clone();
+  $('#menubar').remove();
   console.log(requestObj);
-  $.ajax({
-    url: 'http://localhost:3000/api/search',
-    type: 'POST',
-    dataType: 'json',
-    data: requestObj,
-    success: function(data){
-      $('#menubar').remove();
-      populateSearchResults(data, jqueryCloneElement);
-      console.log(data);
-    },
-    error: function(xhr, status, error){
-      console.log(`xhr is: ${xhr}, status is: ${status}, error is: `);
-      console.log(error);
+  setTimeout(function(){
+    $.ajax({
+      url: 'http://localhost:3000/api/search',
+      type: 'POST',
+      dataType: 'json',
+      data: requestObj,
+      success: function(data){
+        populateSearchResults(data, jqueryCloneElement);
+        console.log(data);
+      },
+      error: function(xhr, status, error){
+        console.log(xhr);
+        populateSearchResultsError(xhr, error, jqueryCloneElement);
+        console.log(`xhr is: ${xhr}, status is: ${status}, error is: `);
+        console.log(error);
+      }
+    });
+  }, 50);
+  $('#content').prepend("<img id='loaderImg' class='loader' src='./images/pluginsvg/three-dots.svg'/>");
+}
+
+let populateSearchResultsError = function(xhr, error, jqueryClonedElement){
+  if($('#loaderImg').length != 0){
+    $('#loaderImg').remove();
+  }
+  $('#content').append("<div id=resultWindow></div>");
+  $('#resultWindow').append("<table id='backButtonTable' class='table tblCss'><tr id='backButton'class='links'><td>"+
+    "<img src='./images/pluginsvg/previous.svg'"+
+     "height='16px'"+
+     "width='16px' />"+
+     " Back</td></tr></table>");
+  if(xhr.status == 0){
+    $('#resultWindow').append("<p style='margin-left: 10px;'>Empty response, server is down or being updated.</p>");
+  }
+  $('#resultWindow').append("<p style='margin-left: 10px;'>"+error+"</p>");
+  $('#backButton').click(function(){
+    console.log('removing');
+    if($('#resultWindow').length != 0){
+      $('#resultWindow').remove();
+      $('#content').append(jqueryClonedElement);
+      document.getElementById('options').addEventListener('click', openOptions);
+      document.getElementById('ratings').addEventListener('click', handleClick);
+      $('#searchBox').val('');
+      if($('#searchBarSubmit').length != 0){
+        $('#searchBarSubmit').remove();
+        $('#defaultSchool').remove();
+        $('#labelDrop').remove();
+        if($('#universitySelect').length != 0){
+          $('#universitySelect').remove();
+        }
+      }
     }
-  })
+  });
 }
 
 let populateSearchResults = function(data, jqueryClonedElement){
   if($('#resultWindow').length != 0){
     $('#resultWindow').empty();
+  }
+  if($('#loaderImg').length != 0){
+    $('#loaderImg').remove();
   }
   console.log(`data length is ${data.length}`);
   //TODO FIX RESULTS INCOMING AND FINISH PLUGIN TONIGHT
@@ -157,13 +201,14 @@ let populateSearchResults = function(data, jqueryClonedElement){
     $('#resultsFromSearch').append("<tr><th class='centerTd'>Rating</th><th>Prof Name</th></tr>");
     console.log('real data came in');
     for(let i=0; i<data.length; i++){
-      let departmentStr = "Dept: ";
+      let departmentStr = "";
       if(data[i].department !== undefined){
-        departmentStr += data[i].department;
+        departmentStr = departmentStrParser(data[i].department);
+        //departmentStr += data[i].department;
       }
       $('#resultsFromSearch').append(
         "<tr class='links clickableRow' data-href='"+profRMPLink+data[i].pk_id+"'><td class='centerTd'>"+data[i].averageratingscore_rf+"</td>"+
-        "<td>"+data[i].teacherlastname_t+", "+data[i].teacherfirstname_t+"<p>"+departmentStr+"</p></td></tr>");
+        "<td>"+data[i].teacherlastname_t+", "+data[i].teacherfirstname_t+"<p><i>"+departmentStr+"</i></p></td></tr>");
     }
   }
   $('.clickableRow').click(function(){
@@ -309,6 +354,22 @@ let checkUrl = function(resultsArray){
     $('#ratings').css('text-decoration', 'line-through');
     $('#ratings').parent().removeClass("links");
   }
+}
+
+let departmentStrParser = function(departmentStr){
+  if(departmentStr.indexOf("+") == -1){
+    return decodeURI(departmentStr);
+  }
+  let answerStr = "";
+  let tempStrArr = [];
+  tempStrArr = departmentStr.replace("+", " ").split(" ");
+  for(let i=0; i<tempStrArr.length; i++){
+    answerStr += decodeURI(tempStrArr[i]);
+    if(i != tempStrArr.length-1){
+      answerStr += " ";
+    }
+  }
+  return answerStr;
 }
 
 /**
