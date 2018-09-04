@@ -24,12 +24,6 @@ String.prototype.isEmpty = function() {
     return (this.length === 0 || !this.trim());
 };
 
-
-/**
- * Handle a submit from the searchbar form
- * @param {details} - chrome api to get current tab
- */
-
 let handleClick = function(details){
   chrome.tabs.executeScript(
     {code: 'window.location.host'},
@@ -44,11 +38,6 @@ function sendUrl(resultsArray){
     console.log(response);
   });
 }
-
-/**
- * Handle a submit from the searchbar form
- * @param {event} - to prevent the form from doing default actions
- */
 
 let handleSubmit = function(e){
   e.preventDefault();
@@ -108,15 +97,12 @@ let handleSubmit = function(e){
 }
 
 let sendSearchRequest = function(requestObj){
-  //TODO ADD ERROR RESULTS, ADD TITLE RESULTS, FIX UP OPTIONS PAGE
-
-
   jqueryCloneElement = $('#menubar').clone();
   $('#menubar').remove();
   console.log(requestObj);
   setTimeout(function(){
     $.ajax({
-      url: 'http://localhost:3000/api/search',
+      url: 'https://ratemyprofchrome.herokuapp.com/api/search',
       type: 'POST',
       dataType: 'json',
       data: requestObj,
@@ -169,7 +155,7 @@ let populateSearchResultsError = function(xhr, error, jqueryClonedElement){
   });
 }
 
-let populateSearchResults = function(data, jqueryClonedElement){
+let populateSearchResults = function(data, jqueryCloneElement){
   if($('#resultWindow').length != 0){
     $('#resultWindow').empty();
   }
@@ -177,7 +163,6 @@ let populateSearchResults = function(data, jqueryClonedElement){
     $('#loaderImg').remove();
   }
   console.log(`data length is ${data.length}`);
-  //TODO FIX RESULTS INCOMING AND FINISH PLUGIN TONIGHT
   let profRMPLink = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid=';
   console.log(data);
   if(data.length != 0){
@@ -209,7 +194,7 @@ let populateSearchResults = function(data, jqueryClonedElement){
     console.log('removing');
     if($('#resultWindow').length != 0){
       $('#resultWindow').remove();
-      $('#content').append(jqueryClonedElement);
+      $('#content').append(jqueryCloneElement);
       document.getElementById('options').addEventListener('click', openOptions);
       document.getElementById('ratings').addEventListener('click', handleClick);
       $('#searchBox').val('');
