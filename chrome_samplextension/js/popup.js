@@ -31,15 +31,6 @@ String.prototype.isEmpty = function() {
  */
 
 let handleClick = function(details){
-  // chrome.runtime.sendMessage(
-  //   {
-  //     type: "testing",
-  //     url: window.location.href
-  //   },
-  //   function (response) {
-  //     console.log(response);
-  //   }
-  // );
   chrome.tabs.executeScript(
     {code: 'window.location.host'},
     sendUrl);
@@ -204,7 +195,6 @@ let populateSearchResults = function(data, jqueryClonedElement){
       let departmentStr = "";
       if(data[i].department !== undefined){
         departmentStr = departmentStrParser(data[i].department);
-        //departmentStr += data[i].department;
       }
       $('#resultsFromSearch').append(
         "<tr class='links clickableRow' data-href='"+profRMPLink+data[i].pk_id+"'><td class='centerTd'>"+data[i].averageratingscore_rf+"</td>"+
@@ -286,8 +276,6 @@ let handleInput = function(){
         $('#searchbar').append("<div class='top-buffer' id='universitySelect'><select id='dropdownUniversity' class='form-control'>" +
           "</select></div>"
         );
-        //let optionToAdd = new Option('Carleton University', 1420);
-        //$('#dropdownUniversity').append($(optionToAdd));
         populateDropdown();
       }
     }
@@ -332,19 +320,12 @@ let populateDropdown = function(){
   }
 }
 
-let herro = function(){
-  console.log('testing');
-}
-
 let openOptions = function(){
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage();
   } else {
     window.open(chrome.runtime.getURL('options.html'));
   }
-  // chrome.tabs.create({
-  //   url: 'options.html'
-  // });
 }
 
 let checkUrl = function(resultsArray){
@@ -372,10 +353,6 @@ let departmentStrParser = function(departmentStr){
   return answerStr;
 }
 
-/**
- * Initiate listeners to active elements
- */
-
 window.onload = function() {
   chrome.tabs.executeScript(
     {code: 'window.location.host'},
@@ -383,13 +360,6 @@ window.onload = function() {
   document.getElementById('ratings').addEventListener('click',handleClick);
   document.getElementById('searchForProf').addEventListener('submit', handleSubmit);
   document.getElementById('searchForProf').addEventListener('input', handleInput);
-  //$('#searchForProf').change(handleInput);
   document.getElementById('options').addEventListener('click', openOptions);
   $('#searchbar').on('click', 'button', handleSubmit);
-  //console.log(document.getElementById('searchForProf'));
 }
-
-/*
-$('body').on('click', '#ratings', function () {
-     console.log("yeahhhh!!! but this doesn't work for me :(");
-});*/

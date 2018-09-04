@@ -1,3 +1,7 @@
+/**
+ * Function to save the default school to be used for the dropdown with extension
+ */
+
 function save_options(){
   var school = parseInt(document.getElementById('school').value);
   chrome.storage.sync.set({
