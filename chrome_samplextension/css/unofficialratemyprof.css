@@ -21,10 +21,12 @@ textarea:focus, input:focus{
 
 .links{
   cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .links:hover{
   background: #eee;
+  filter: none;
 }
 
 #searchbar{
@@ -35,4 +37,25 @@ textarea:focus, input:focus{
 
 .top-buffer{
   margin-top: 10px;
+}
+
+.spacing {
+  margin-left: 5%;
+  width: 70%;
+}
+
+
+#resultsFromSearch{
+  margin-right: 5px;
+}
+
+.centerTd{
+  text-align: center;
+}
+
+.loader{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
 }

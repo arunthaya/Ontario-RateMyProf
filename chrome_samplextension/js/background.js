@@ -33,16 +33,16 @@ chrome.runtime.onMessage.addListener(
     if(request.type == "testing"){
       console.log(`incoming request is: ${request.url}`);
       chrome.tabs.executeScript(
-        {file: "jquery-3.3.1.min.js"},
+        {file: "./js/jquery-3.3.1.min.js"},
         function(){
           chrome.tabs.executeScript(
-            {file: "jquery.qtip.min.js"},
+            {file: "./js/jquery.qtip.min.js"},
             function(){
               chrome.tabs.insertCSS(
-                {file: "jquery.qtip.min.css"},
+                {file: "./css/jquery.qtip.min.css"},
                 function(){
                   chrome.tabs.executeScript(
-                    {file: "contentScript.js"}
+                    {file: "./js/contentScript.js"}
                   );
                 }
               )
