@@ -1,4 +1,4 @@
-# chrome_plugin
+# Unofficial RateMyProf Chrome Plugin
 Chrome plugin that will help students in Ontario.
 
 Steps to install (if you are installing locally):
