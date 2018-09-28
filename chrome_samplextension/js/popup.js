@@ -338,6 +338,11 @@ let departmentStrParser = function(departmentStr){
   return answerStr;
 }
 
+let openHelp = function(){
+  let newURL = "https://github.com/arunthaya/chrome_plugin";
+  chrome.tabs.create({ url: newURL });
+}
+
 window.onload = function() {
   chrome.tabs.executeScript(
     {code: 'window.location.host'},
@@ -346,5 +351,6 @@ window.onload = function() {
   document.getElementById('searchForProf').addEventListener('submit', handleSubmit);
   document.getElementById('searchForProf').addEventListener('input', handleInput);
   document.getElementById('options').addEventListener('click', openOptions);
+  document.getElementById('help').addEventListener('click', openHelp);
   $('#searchbar').on('click', 'button', handleSubmit);
 }
