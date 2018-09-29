@@ -1,6 +1,6 @@
 {
-    "name": "Unofficial RateMyProf Extension (Ontario ed.)",
-    "version": "0.0.3",
+    "name": "Ontario Rate My Prof",
+    "version": "0.0.4",
     "description": "Rate professors in seconds!",
     "permissions": [
       "https://ratemyprofchrome.herokuapp.com/",
@@ -23,7 +23,7 @@
       "default_icon": {
         "16": "images/teacher_rmp16.png",
         "32": "images/teacher_rmp32.png",
-        "48": "images/teacher_rmp48.png",
+        "48": "images/teacher_rmp48.jpg",
         "128": "images/teacher_rmp128.png"
       },
       "default_title": "Unofficial Rate My Prof",
