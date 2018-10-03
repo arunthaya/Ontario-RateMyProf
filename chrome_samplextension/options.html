@@ -2,28 +2,41 @@
 <html>
 <head>
   <title>Unofficial RateMyProf - (Ontario ed.)</title>
+  <link rel="stylesheet" href="./css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./semantic/semantic.css" />
+  <link rel="stylesheet" href="./css/unofficialratemyprof.css" />
+  <script src='./js/jquery-3.3.1.min.js'></script>
+  <script src="semantic/semantic.js"></script>
 </head>
 <body>
+  <div class="jumbotron" style="text-align: center;">
+    <img  src="./images/teacher_rmp48.png"/>
+    <h2 class="display-4">Ontario Rate My Prof Options</h2>
+    <hr class="my-4">
+    <p>Thank you for installing!</p>
+  </div>
   <div style="text-align: center;">
-    <p>Default school:
-      <select id="school">
-        <option value="1420">Carleton University</option>
-        <option value="1452">University of Ottawa</option>
-        <option value="1484">U of T(St. George)</option>
-        <option value="4928">U of T(Mississauga)</option>
-        <option value="4919">U of T(Scarborough)</option>
-        <option value="1490">University of Waterloo</option>
-        <option value="1426">University of Guelph</option>
-        <option value="1495">York University</option>
-        <option value="1440">McMaster University</option>
-        <option value="1491">Western University</option>
-        <option value="1466">Queen's University</option>
-        <option value="1471">Ryerson University</option>
-        <option value="1492">Wilfred Laurier University</option>
-      </select>
+    <p>Select your default school using the dropdown below.</p>
+      <p>Default school:
+          <select id="school">
+            <option value="1420">Carleton University</option>
+            <option value="1452">University of Ottawa</option>
+            <option value="1484">U of T(St. George)</option>
+            <option value="4928">U of T(Mississauga)</option>
+            <option value="4919">U of T(Scarborough)</option>
+            <option value="1490">University of Waterloo</option>
+            <option value="1426">University of Guelph</option>
+            <option value="1495">York University</option>
+            <option value="1440">McMaster University</option>
+            <option value="1491">Western University</option>
+            <option value="1466">Queen's University</option>
+            <option value="1471">Ryerson University</option>
+            <option value="1492">Wilfred Laurier University</option>
+          </select>
     </p>
-    <div id="status"></div>
-    <button id="save">Save</button>
+    <div id="status">
+    </div>
+    <button class="btn btn-primary" id="save">Save</button>
   </div>
 <script src="./js/options.js"></script>
 </body>

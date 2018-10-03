@@ -8,10 +8,10 @@ function save_options(){
     defaultSchool: school
   }, function(){
     var status = document.getElementById('status');
-    status.textContent = 'Options saved';
+    status.textContent = 'Option saved';
     setTimeout(function(){
       status.textContent = '';
-    }, 750);
+    }, 1500);
   });
 }
 

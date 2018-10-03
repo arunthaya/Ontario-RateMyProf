@@ -35,7 +35,7 @@ function sendUrl(resultsArray){
     type: "testing",
     url: resultsArray[0]
   }, function(response){
-    console.log(response);
+    //console.log(response);
   });
 }
 
@@ -44,7 +44,7 @@ let handleSubmit = function(e){
   let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   let stringEntered = $.trim($('#searchBox').val());
   if (format.test(stringEntered)){
-    console.log('special character entered');
+    //console.log('special character entered');
     $('#searchBox').css({'background-color' : '#e28596'});
     $('#searchBoxStatus').text('No special characters');
   } else {
@@ -66,7 +66,7 @@ let handleSubmit = function(e){
     requestObj.professorName = finalizedProfessorString;
     chrome.storage.sync.get('defaultSchool', function(data){
       if(chrome.runtime.error){
-        console.log(chrome.runtime.error);
+        //console.log(chrome.runtime.error);
         if($('#universitySelect').length != 0){
           requestObj.school = $('#universitySelect').val();
         } else {
@@ -80,8 +80,8 @@ let handleSubmit = function(e){
           }
           else {
             if($('#universitySelect').length != 0){
-              console.log('inside this function and university select value is ');
-              console.log($('#dropdownUniversity').val());
+              //console.log('inside this function and university select value is ');
+              //console.log($('#dropdownUniversity').val());
               requestObj.school = $('#dropdownUniversity').val();
             } else {
               requestObj.school = data.defaultSchool;
@@ -99,7 +99,7 @@ let handleSubmit = function(e){
 let sendSearchRequest = function(requestObj){
   jqueryCloneElement = $('#menubar').clone();
   $('#menubar').remove();
-  console.log(requestObj);
+  //console.log(requestObj);
   setTimeout(function(){
     $.ajax({
       url: 'https://ratemyprofchrome.herokuapp.com/api/search',
@@ -108,13 +108,13 @@ let sendSearchRequest = function(requestObj){
       data: requestObj,
       success: function(data){
         populateSearchResults(data, jqueryCloneElement);
-        console.log(data);
+        //console.log(data);
       },
       error: function(xhr, status, error){
-        console.log(xhr);
+        //console.log(xhr);
         populateSearchResultsError(xhr, error, jqueryCloneElement);
-        console.log(`xhr is: ${xhr}, status is: ${status}, error is: `);
-        console.log(error);
+        //console.log(`xhr is: ${xhr}, status is: ${status}, error is: `);
+        //console.log(error);
       }
     });
   }, 50);
@@ -136,7 +136,7 @@ let populateSearchResultsError = function(xhr, error, jqueryClonedElement){
   }
   $('#resultWindow').append("<p style='margin-left: 10px;'>"+error+"</p>");
   $('#backButton').click(function(){
-    console.log('removing');
+    //console.log('removing');
     if($('#resultWindow').length != 0){
       $('#resultWindow').remove();
       $('#content').append(jqueryClonedElement);
@@ -162,9 +162,9 @@ let populateSearchResults = function(data, jqueryCloneElement){
   if($('#loaderImg').length != 0){
     $('#loaderImg').remove();
   }
-  console.log(`data length is ${data.length}`);
+  //console.log(`data length is ${data.length}`);
   let profRMPLink = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid=';
-  console.log(data);
+  //console.log(data);
   if(data.length != 0){
     $('#content').append("<div id='resultWindow'></div>");
     $('#resultWindow').append("<table id='backButtonTable' class='table tblCss'><tr id='backButton'class='links'><td>"+
@@ -175,7 +175,7 @@ let populateSearchResults = function(data, jqueryCloneElement){
     $('#resultWindow').append("<p id='resultHeading' style='margin-left: 5px;'>Results:</p>");
     $('#resultWindow').append("<table id='resultsFromSearch' class='table tblCss'></table>");
     $('#resultsFromSearch').append("<tr><th class='centerTd'>Rating</th><th>Prof Name</th></tr>");
-    console.log('real data came in');
+    //console.log('real data came in');
     for(let i=0; i<data.length; i++){
       let departmentStr = "";
       if(data[i].department !== undefined){
@@ -191,7 +191,7 @@ let populateSearchResults = function(data, jqueryCloneElement){
     chrome.tabs.create({url: newURL});
   });
   $('#backButton').click(function(){
-    console.log('removing');
+    //console.log('removing');
     if($('#resultWindow').length != 0){
       $('#resultWindow').remove();
       $('#content').append(jqueryCloneElement);
@@ -218,10 +218,10 @@ let handleInput = function(){
   $('#searchBox').css({'background-color': ''});
   searchBarActivated = false;
   if($.trim($('#searchBox').val()) == ""){
-    console.log('blank');
+    //console.log('blank');
   } else {
     searchBarActivated = true;
-    console.log('something entered');
+    //console.log('something entered');
   }
   if(searchBarActivated){
     if($('#searchBarSubmit').length == 0 && $('#universitySelect').length == 0){
@@ -247,12 +247,12 @@ let handleInput = function(){
         document.getElementById('ratings').addEventListener('click', handleClick);
       }
     } else {
-      console.log('critical error - popup.js (72)');
+      //console.log('critical error - popup.js (72)');
     }
   }
   $('#defaultSchool').change(function() {
     if($(this).is(':checked')){
-      console.log('do nothing');
+      //console.log('do nothing');
       if($('#universitySelect').length != 0){
         $('#universitySelect').remove();
       }
@@ -265,7 +265,7 @@ let handleInput = function(){
       }
     }
   });
-  console.log('input detected');
+  //console.log('input detected');
 }
 
 let populateDropdown = function(){
@@ -274,21 +274,21 @@ let populateDropdown = function(){
   } else {
     chrome.storage.sync.get('defaultSchool', function(data){
       if(chrome.runtime.lastError){
-        console.log(chrome.runtime.lastError);
+        //console.log(chrome.runtime.lastError);
         for(let key in schoolIdDict){
-          console.log(schoolIdDict[key]);
+          //console.log(schoolIdDict[key]);
           let newOption = new Option(schoolIdDict[key], key);
           $('#dropdownUniversity').append($(newOption));
         }
       }
       if(data != null){
-        console.log(data.defaultSchool);
+        //console.log(data.defaultSchool);
         let textDropDown = schoolIdDict[data.defaultSchool];
         let defaultOption = new Option('Default: '+textDropDown, data.defaultSchool);
         $('#dropdownUniversity').append($(defaultOption));
         $('#dropdownUniversity').append("<option disabled='disabled'>-----</option>");
         for(let key in schoolIdDict){
-          console.log(schoolIdDict[key]);
+          //console.log(schoolIdDict[key]);
           let newOption = new Option(schoolIdDict[key], key);
           if(schoolIdDict.hasOwnProperty(key) && key != data.defaultSchool){
             $('#dropdownUniversity').append($(newOption));
@@ -296,7 +296,7 @@ let populateDropdown = function(){
         }
       } else {
         for(let key in schoolIdDict){
-          console.log(schoolIdDict[key]);
+          //console.log(schoolIdDict[key]);
           let newOption = new Option(schoolIdDict[key], key);
           $('#dropdownUniversity').append($(newOption));
         }
@@ -306,15 +306,16 @@ let populateDropdown = function(){
 }
 
 let openOptions = function(){
-  if (chrome.runtime.openOptionsPage) {
-    chrome.runtime.openOptionsPage();
-  } else {
-    window.open(chrome.runtime.getURL('options.html'));
-  }
+  // if (chrome.runtime.openOptionsPage) {
+  //   chrome.runtime.openOptionsPage();
+  // } else {
+  //   window.open(chrome.runtime.getURL('options.html'));
+  // }
+   window.open(chrome.runtime.getURL('options.html'));
 }
 
 let checkUrl = function(resultsArray){
-  console.log(resultsArray[0]);
+  ////console.log(resultsArray[0]);
   if(resultsArray[0] != 'central.carleton.ca'){
     document.getElementById('ratings').removeEventListener('click', handleClick);
     $('#ratings').css('text-decoration', 'line-through');

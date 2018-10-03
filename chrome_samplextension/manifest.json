@@ -23,16 +23,13 @@
       "default_icon": {
         "16": "images/teacher_rmp16.png",
         "32": "images/teacher_rmp32.png",
-        "48": "images/teacher_rmp48.jpg",
+        "48": "images/teacher_rmp48.png",
         "128": "images/teacher_rmp128.png"
       },
       "default_title": "Unofficial Rate My Prof",
       "default_popup": "popup.html"
     },
-    "options_ui":{
-      "page":"options.html",
-      "open_in_tab":false
-    },
+    "options_page": "options.html",
     "author":"arun thayanithy",
     "manifest_version": 2
  }

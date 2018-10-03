@@ -59,3 +59,10 @@ textarea:focus, input:focus{
   margin-right: auto;
   margin-bottom: 10px;
 }
+
+#school{
+  background-color: #1abc9c;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 1.2em;
+}
