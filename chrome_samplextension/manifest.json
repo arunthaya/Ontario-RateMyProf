@@ -1,6 +1,6 @@
 {
     "name": "Ontario Rate My Prof",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Rate professors in seconds!",
     "permissions": [
       "https://ratemyprofchrome.herokuapp.com/",
@@ -30,6 +30,6 @@
       "default_popup": "popup.html"
     },
     "options_page": "options.html",
-    "author":"arun thayanithy",
+    "author":"Arun Thayanithy",
     "manifest_version": 2
  }

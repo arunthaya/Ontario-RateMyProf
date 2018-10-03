@@ -5,17 +5,19 @@
   <link rel="stylesheet" href="./css/bootstrap.min.css" />
   <link rel="stylesheet" href="./semantic/semantic.css" />
   <link rel="stylesheet" href="./css/unofficialratemyprof.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/optionspage.css" />
   <script src='./js/jquery-3.3.1.min.js'></script>
-  <script src="semantic/semantic.js"></script>
 </head>
 <body>
+
   <div class="jumbotron" style="text-align: center;">
     <img  src="./images/teacher_rmp48.png"/>
     <h2 class="display-4">Ontario Rate My Prof Options</h2>
     <hr class="my-4">
-    <p>Thank you for installing!</p>
+    <p>Select your school below:</p>
   </div>
-  <div style="text-align: center;">
+  <!--  <div style="text-align: center;">
     <p>Select your default school using the dropdown below.</p>
       <p>Default school:
           <select id="school">
@@ -34,10 +36,210 @@
             <option value="1492">Wilfred Laurier University</option>
           </select>
     </p>
+
+    <button class="btn btn-primary" id="save">Save</button>
+  </div> -->
+
+  <div style="text-align: center;">
     <div id="status">
     </div>
-    <button class="btn btn-primary" id="save">Save</button>
+    <div class="card-container card--fixedWidth">
+      <div class="card" data-value="1420">
+
+        <div class="card__image" id="card-1" >
+          <div class="image-overlay">
+          </div>
+          <!-- <br> -->
+          <!-- Carleton University -->
+          <img src="./images/logos/carletonu_edit.png" height="150px" width="115px" alt="" align="middle" />
+        </div>
+        <div class="card__actions">
+    <!--       &#8230; -->
+        </div>
+        <div class="card__description">
+          Carleton University
+        </div>
+
+      </div><!-- /.card -->
+
+     <div class="card" data-value="1452">
+
+      <div class="card__image" id="card-2">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/ottawau.png" height="150px" width="115px" alt="" />
+      </div>
+      <div class="card__actions">
+  <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        Ottawa University
+      </div>
+
+    </div><!-- /.card -->
+
+   <div class="card" data-value="1484">
+
+    <div class="card__image" id="card-3">
+      <div class="image-overlay">
+      </div>
+      <img src="./images/logos/uoft.png" height="150px" width="115px"  alt="" />
+    </div>
+    <div class="card__actions">
+<!--       &#8230; -->
+    </div>
+    <div class="card__description">
+      U of T (St.George)
+    </div>
+
+  </div><!-- /.card -->
+
+  <div class="card" data-value="4919">
+
+   <div class="card__image" id="card-4">
+     <div class="image-overlay">
+     </div>
+     <img src="./images/logos/uoft.png" height="150px" width="115px"  alt="" />
+   </div>
+   <div class="card__actions">
+<!--       &#8230; -->
+   </div>
+   <div class="card__description">
+     U of T (Scarborough)
+   </div>
+
+ </div><!-- /.card -->
+
+ <div class="card" data-value="4928">
+
+  <div class="card__image" id="card-5">
+    <div class="image-overlay">
+    </div>
+    <img src="./images/logos/uoft.png" height="150px" width="115px"  alt="" />
   </div>
+  <div class="card__actions">
+<!--       &#8230; -->
+  </div>
+  <div class="card__description">
+    U of T (Mississauga)
+  </div>
+
+</div><!-- /.card -->
+
+    <div class="card" data-value="1490">
+      <div class="card__image" id="card-6">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/waterloou.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        Waterloo University
+      </div>
+    </div><!-- /.card -->
+
+    <div class="card" data-value="1426">
+      <div class="card__image" id="card-7">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/guelphu.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        University of Guelph
+      </div>
+    </div><!-- /.card -->
+
+    <div class="card" data-value="1495">
+      <div class="card__image" id="card-8">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/yorku.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        York University
+      </div>
+    </div><!-- /.card -->
+
+    <div class="card" data-value="1440">
+      <div class="card__image" id="card-9">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/mcmasteru.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        McMaster University
+      </div>
+    </div><!-- /.card -->
+
+    <div class="card" data-value="1491">
+      <div class="card__image" id="card-10">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/westernu.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        Western University
+      </div>
+    </div><!-- /.card -->
+
+    <div class="card" data-value="1466">
+      <div class="card__image" id="card-11">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/queensu.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        Queen's University
+      </div>
+    </div><!-- /.card -->
+
+    <div class="card" data-value="1471">
+      <div class="card__image" id="card-12">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/ryersonu.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        Ryerson University
+      </div>
+    </div><!-- /.card -->
+
+    <div class="card" data-value="1492">
+      <div class="card__image" id="card-13">
+        <div class="image-overlay">
+        </div>
+        <img src="./images/logos/laurieru.png" height="150px" width="115px"  alt="" />
+      </div>
+      <div class="card__actions">
+        <!--       &#8230; -->
+      </div>
+      <div class="card__description">
+        Laurier University
+      </div>
+    </div><!-- /.card -->
+
+  </div><!-- /.card-container -->
+</div>
 <script src="./js/options.js"></script>
 </body>
 </html>

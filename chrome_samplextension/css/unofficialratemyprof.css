@@ -61,8 +61,8 @@ textarea:focus, input:focus{
 }
 
 #school{
-  background-color: #1abc9c;
-  color: #fff;
+  /* background-color: #1abc9c; */
+  color: black;
   border-radius: 3px;
   font-size: 1.2em;
 }
